@@ -5,7 +5,7 @@ const clearButton = document.querySelector('#clear');
 const itemFilter = document.querySelector('#filter')
 
 
-function addItem(e){
+function onAddItemSubmit(e){
     e.preventDefault();
     const newItem = itemInput.value;
     // Validat Input
@@ -13,19 +13,58 @@ function addItem(e){
         alert('Please add an item');
         return;
     } 
+    // // Create list item
+    // const li = document.createElement('li');
+    // li.appendChild(document.createTextNode(newItem));
+    
+    // const button = createButton('remove-item btn-link text-red');
+    // li.appendChild(button)
+    
+    // // Add li to the DOM
+    // itemList.appendChild(li);
+
+    // Create item DOM element
+    addItemToDOM(newItem);
+
+    // Add item to local storage
+    addItemToStorage(newItem);
+
+    
+    checkUI();
+
+    itemInput.value = '';
+}
+
+
+// Function add item to dom
+function addItemToDOM(item){
     // Create list item
     const li = document.createElement('li');
-    li.appendChild(document.createTextNode(newItem));
+    li.appendChild(document.createTextNode(item));
     
     const button = createButton('remove-item btn-link text-red');
     li.appendChild(button)
     
     // Add li to the DOM
     itemList.appendChild(li);
+}
 
-    checkUI();
 
-    itemInput.value = '';
+// Function to add item to storage
+function addItemToStorage(item){
+    let itemsFromStorage; // creating the variable
+    
+    if(localStorage.getItem('items') === null){ // we are checking to see if there are no items in storage
+        itemsFromStorage = []; // if there isnt (null), that variable is set to an empty array
+    } else {
+        itemsFromStorage = JSON.parse(localStorage.getItem('items'));  // gives an array JSON.parse
+        //If there is, we are parsing a string back into an Array and putting those items in itemsFromStorage variable.
+    }
+    // Add new item to array
+    itemsFromStorage.push(item);
+
+    //Convert to JSON string and set to local storage
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
 }
 
 // Function that is creating a button with a classes paramaterer
@@ -101,7 +140,7 @@ const items = itemList.querySelectorAll('li'); // nodeList, when using querySele
 
 
 // Event Listeners
-itemForm.addEventListener('submit', addItem);
+itemForm.addEventListener('submit', onAddItemSubmit);
 itemList.addEventListener('click', removeItem);
 clearButton.addEventListener('click', clearItems);
 itemFilter.addEventListener('input', filterItems)
