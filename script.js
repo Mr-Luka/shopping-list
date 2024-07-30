@@ -106,4 +106,24 @@ itemList.addEventListener('click', removeItem);
 clearButton.addEventListener('click', clearItems);
 itemFilter.addEventListener('input', filterItems)
 
-checkUI()
+checkUI();
+
+
+/*
+We want to get an item that was put into an item list, into a localStorage, so when I refresh
+the page, it is saved and it stays still on.
+We also want to be able to remove an item, if we have an item and then we delete it, we also want
+to delete it from a local storage.
+And then we also want to load the items when the page loads, we want to fetch from local storage
+and show those items.
+
+We can only store strings in the local storage.
+It's key value pairs, and the value has to be a string.
+What we want to save though is the list of items.
+So what we are gonna do is have an array of the list of items, and we are gonna stringify
+that with the JSON.stringify method, and then we are gonna put it in local storage, so its
+actually stored as a string, but it looks like an array.
+Then when we take it out, we can run it through JSON.parse method, and that will turn it back
+into a regular array that we can use
+
+*/
