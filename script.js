@@ -1,6 +1,7 @@
 const itemForm = document.querySelector('#item-form');
 const itemInput = document.querySelector('#item-input');
 const itemList = document.querySelector('#item-list');
+const clearButton = document.querySelector('#clear');
 
 
 function addItem(e){
@@ -38,6 +39,15 @@ function createIcon (classes){
     return icon;
 }
 
+// Function to remove items
+function removeItem(e){
+    if(e.target.parentElement.classList.contains('remove-item')){ //targeting the right thing, X
+        e.target.parentElement.parentElement.remove() // .parentElement - button, and second .parentElement is the List Item
+    }
+}
+
 
 // Event Listeners
 itemForm.addEventListener('submit', addItem);
+itemList.addEventListener('click', removeItem);
+clearButton.addEventListener('click', clearItems)
