@@ -63,6 +63,26 @@ function clearItems (){
     checkUI();
 }
 
+
+
+
+// Function that will filter out items
+function filterItems(e){
+    const items = itemList.querySelectorAll('li');
+    const text = e.target.value.toLowerCase();
+    items.forEach(item=> {
+        const itemName = item.firstChild.textContent.toLowerCase(); // getting the text, not the whole thing with html
+        
+        if(itemName.indexOf(text) != -1){ // if the text that's typed in, matches the itemNames it wll be true
+          item.style.display = 'flex';
+        } else {
+            item.style.display = 'none'
+        }
+    });
+}
+
+
+
 // Function that will check if there are any items in the UI,
 // if there is nothing, hide clear button and filter, and if there is, show 
 function checkUI(){
@@ -79,9 +99,11 @@ const items = itemList.querySelectorAll('li'); // nodeList, when using querySele
 }
 
 
+
 // Event Listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearButton.addEventListener('click', clearItems);
+itemFilter.addEventListener('input', filterItems)
 
 checkUI()
