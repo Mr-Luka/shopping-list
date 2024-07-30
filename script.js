@@ -46,6 +46,14 @@ function removeItem(e){
     }
 }
 
+// Function that is clearing all the items from the list
+function clearItems (){
+    // itemList.innerHTML = '';   one way to do it, or:
+    while(itemList.firstChild) {
+        itemList.removeChild(itemList.firstChild);
+    }
+}
+
 
 // Event Listeners
 itemForm.addEventListener('submit', addItem);
