@@ -2,6 +2,7 @@ const itemForm = document.querySelector('#item-form');
 const itemInput = document.querySelector('#item-input');
 const itemList = document.querySelector('#item-list');
 const clearButton = document.querySelector('#clear');
+const itemFilter = document.querySelector('#filter')
 
 
 function addItem(e){
@@ -19,7 +20,11 @@ function addItem(e){
     const button = createButton('remove-item btn-link text-red');
     li.appendChild(button)
     
+    // Add li to the DOM
     itemList.appendChild(li);
+
+    checkUI();
+
     itemInput.value = '';
 }
 
@@ -54,8 +59,25 @@ function clearItems (){
     }
 }
 
+// Function that will check if there are any items in the UI,
+// if there is nothing, hide clear button and filter, and if there is, show 
+function checkUI(){
+const items = itemList.querySelectorAll('li'); // nodeList, when using querySelectorAll
+//have to define items here, because if its up above, it will define it and thats it, so node list
+//will always be 0, and here its defined inside checkUI
+    if(items.length === 0) {
+        clearButton.style.display = 'none';
+        itemFilter.style.display = 'none'
+    } else {
+        clearButton.style.display = 'block';
+        itemFilter.style.display = 'block';
+    }
+}
+
 
 // Event Listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
-clearButton.addEventListener('click', clearItems)
+clearButton.addEventListener('click', clearItems);
+
+checkUI()
