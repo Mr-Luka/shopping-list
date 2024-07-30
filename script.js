@@ -47,7 +47,10 @@ function createIcon (classes){
 // Function to remove items
 function removeItem(e){
     if(e.target.parentElement.classList.contains('remove-item')){ //targeting the right thing, X
-        e.target.parentElement.parentElement.remove() // .parentElement - button, and second .parentElement is the List Item
+        if (confirm('Are you sure?')){
+            e.target.parentElement.parentElement.remove() // .parentElement - button, and second .parentElement is the List Item
+        checkUI()
+        }
     }
 }
 
@@ -57,6 +60,7 @@ function clearItems (){
     while(itemList.firstChild) {
         itemList.removeChild(itemList.firstChild);
     }
+    checkUI();
 }
 
 // Function that will check if there are any items in the UI,
