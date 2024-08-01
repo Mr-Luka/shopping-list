@@ -121,6 +121,15 @@ function removeItem(item){
         checkUI();
     }
 }
+function removeItemFromStorage(item){
+    let itemsFromStorage = getItemsFromStorage();
+    
+    // Filter out item to be removed
+    itemsFromStorage = itemsFromStorage.filter((itemm)=> itemm !== item);
+
+    // Re-set to localStorage
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
+}
 
 // Function that is clearing all the items from the list
 function clearItems (){
