@@ -9,6 +9,7 @@ function displayItems (){
     const itemsFromStorage = getItemsFromStorage();
     itemsFromStorage.forEach(item => {
         addItemToDOM(item);
+        checkUI();
     })
 }
 
@@ -156,16 +157,19 @@ const items = itemList.querySelectorAll('li'); // nodeList, when using querySele
     }
 }
 
+// Initialize app
+function init(){
+    // Event Listeners
+    itemForm.addEventListener('submit', onAddItemSubmit);
+    itemList.addEventListener('click', removeItem);
+    clearButton.addEventListener('click', clearItems);
+    itemFilter.addEventListener('input', filterItems);
+    document.addEventListener('DOMContentLoaded', displayItems);
+    
+    checkUI();
+}
+init();
 
-
-// Event Listeners
-itemForm.addEventListener('submit', onAddItemSubmit);
-itemList.addEventListener('click', removeItem);
-clearButton.addEventListener('click', clearItems);
-itemFilter.addEventListener('input', filterItems);
-document.addEventListener('DOMContentLoaded', displayItems);
-
-checkUI();
 
 
 /*
