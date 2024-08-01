@@ -103,13 +103,22 @@ function getItemsFromStorage(){
     return itemsFromStorage;
 }
 
+function onClickItem (e){
+    if(e.target.parentElement.classList.contains('remove-item')){
+        removeItem(e.target.parentElement.parentElement);
+    }   
+}
+
 // Function to remove items
-function removeItem(e){
-    if(e.target.parentElement.classList.contains('remove-item')){ //targeting the right thing, X
-        if (confirm('Are you sure?')){
-            e.target.parentElement.parentElement.remove() // .parentElement - button, and second .parentElement is the List Item
-        checkUI()
-        }
+function removeItem(item){
+    if (confirm('Are you sure?')){
+        // Remove from DOM
+        item.remove();
+
+        //Remove Item from storage
+        removeItemFromStorage(item.textContent)
+
+        checkUI();
     }
 }
 
@@ -157,11 +166,11 @@ const items = itemList.querySelectorAll('li'); // nodeList, when using querySele
     }
 }
 
-// Initialize app
+// Initialize app, so we dont have all the event listeners in a global scope
 function init(){
     // Event Listeners
     itemForm.addEventListener('submit', onAddItemSubmit);
-    itemList.addEventListener('click', removeItem);
+    itemList.addEventListener('click', onClickItem);
     clearButton.addEventListener('click', clearItems);
     itemFilter.addEventListener('input', filterItems);
     document.addEventListener('DOMContentLoaded', displayItems);
