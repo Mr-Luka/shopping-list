@@ -29,7 +29,7 @@ function onAddItemSubmit(e){
     // Add item to local storage
     addItemToStorage(newItem);
 
-    
+
     checkUI();
 
     itemInput.value = '';
@@ -50,22 +50,6 @@ function addItemToDOM(item){
 }
 
 
-// Function to add item to storage
-function addItemToStorage(item){
-    let itemsFromStorage; // creating the variable
-    
-    if(localStorage.getItem('items') === null){ // we are checking to see if there are no items in storage
-        itemsFromStorage = []; // if there isnt (null), that variable is set to an empty array
-    } else {
-        itemsFromStorage = JSON.parse(localStorage.getItem('items'));  // gives an array JSON.parse
-        //If there is, we are parsing a string back into an Array and putting those items in itemsFromStorage variable.
-    }
-    // Add new item to array
-    itemsFromStorage.push(item);
-
-    //Convert to JSON string and set to local storage
-    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
-}
 
 // Function that is creating a button with a classes paramaterer
 function createButton (classes){
@@ -81,6 +65,33 @@ function createIcon (classes){
     const icon = document.createElement('i');
     icon.className = classes;
     return icon;
+}
+
+
+// Function to add item to storage
+function addItemToStorage(item){
+    const itemsFromStorage = getItemsFromStorage();
+    
+    
+    // Add new item to array
+    itemsFromStorage.push(item);
+
+    //Convert to JSON string and set to local storage
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage));
+}
+
+
+// function that will get the items from the storage:
+function getItemsFromStorage(){
+    let itemsFromStorage; // creating the variable
+    
+    if(localStorage.getItem('items') === null){ // we are checking to see if there are no items in storage
+        itemsFromStorage = []; // if there isnt (null), that variable is set to an empty array
+    } else {
+        itemsFromStorage = JSON.parse(localStorage.getItem('items'));  // gives an array JSON.parse
+        //If there is, we are parsing a string back into an Array and putting those items in itemsFromStorage variable.
+    }
+    return itemsFromStorage;
 }
 
 // Function to remove items
