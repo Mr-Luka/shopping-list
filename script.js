@@ -2,7 +2,9 @@ const itemForm = document.querySelector('#item-form');
 const itemInput = document.querySelector('#item-input');
 const itemList = document.querySelector('#item-list');
 const clearButton = document.querySelector('#clear');
-const itemFilter = document.querySelector('#filter')
+const itemFilter = document.querySelector('#filter');
+const formBtn = itemForm.querySelector('button');
+let isEditMode = false;
 
 
 function displayItems (){
@@ -106,7 +108,21 @@ function getItemsFromStorage(){
 function onClickItem (e){
     if(e.target.parentElement.classList.contains('remove-item')){
         removeItem(e.target.parentElement.parentElement);
-    }   
+    } else {
+        setItemToEdit(e.target); // when I click, its gonna capture the list item
+    }
+}
+
+function setItemToEdit(item){
+    isEditMode = true;
+    itemList.querySelectorAll('li').forEach(i=> i.classList.remove('edit-mode'));
+    // item.style.color = '#ccc'; or:
+    item.classList.add('edit-mode');
+    formBtn.innerHTML = `<i class='fa-solid fa-pen'></i>  Update Item`; // When I click the item, addItem button updates
+    // to Update item with a pen logo
+    formBtn.style.backgroundColor = '#228B22';
+    itemInput.value = item.textContent; // When I click the list item, it will show up in the Input value
+
 }
 
 // Function to remove items
@@ -137,6 +153,9 @@ function clearItems (){
     while(itemList.firstChild) {
         itemList.removeChild(itemList.firstChild);
     }
+
+    // Clear from localStorage
+    localStorage.removeItem('items');
     checkUI();
 }
 
