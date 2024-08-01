@@ -5,6 +5,14 @@ const clearButton = document.querySelector('#clear');
 const itemFilter = document.querySelector('#filter')
 
 
+function displayItems (){
+    const itemsFromStorage = getItemsFromStorage();
+    itemsFromStorage.forEach(item => {
+        addItemToDOM(item);
+    })
+}
+
+
 function onAddItemSubmit(e){
     e.preventDefault();
     const newItem = itemInput.value;
@@ -154,7 +162,8 @@ const items = itemList.querySelectorAll('li'); // nodeList, when using querySele
 itemForm.addEventListener('submit', onAddItemSubmit);
 itemList.addEventListener('click', removeItem);
 clearButton.addEventListener('click', clearItems);
-itemFilter.addEventListener('input', filterItems)
+itemFilter.addEventListener('input', filterItems);
+document.addEventListener('DOMContentLoaded', displayItems);
 
 checkUI();
 
