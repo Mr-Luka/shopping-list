@@ -92,7 +92,7 @@ function createIcon (classes){
 }
 
 
-// Function to add item to storage
+// Function to add item to local storage
 function addItemToStorage(item){
     const itemsFromStorage = getItemsFromStorage();
     
