@@ -24,6 +24,15 @@ function onAddItemSubmit(e){
         alert('Please add an item');
         return;
     } 
+    // Check for edit mode
+    if(isEditMode){
+        const itemToEdit = itemList.querySelector('.edit-mode');
+
+        removeItemFromStorage(itemToEdit.textContent);
+        itemToEdit.classList.remove('edit-mode');
+        itemToEdit.remove();
+        isEditMode = false;
+    }
     // // Create list item
     // const li = document.createElement('li');
     // li.appendChild(document.createTextNode(newItem));
@@ -122,7 +131,6 @@ function setItemToEdit(item){
     // to Update item with a pen logo
     formBtn.style.backgroundColor = '#228B22';
     itemInput.value = item.textContent; // When I click the list item, it will show up in the Input value
-
 }
 
 // Function to remove items
@@ -182,6 +190,7 @@ function filterItems(e){
 // Function that will check if there are any items in the UI,
 // if there is nothing, hide clear button and filter, and if there is, show 
 function checkUI(){
+    itemInput.value = '';
 const items = itemList.querySelectorAll('li'); // nodeList, when using querySelectorAll
 //have to define items here, because if its up above, it will define it and thats it, so node list
 //will always be 0, and here its defined inside checkUI
@@ -192,6 +201,9 @@ const items = itemList.querySelectorAll('li'); // nodeList, when using querySele
         clearButton.style.display = 'block';
         itemFilter.style.display = 'block';
     }
+    formBtn.innerHTML = `<i class="fa-solid fa-plus"></i> Add Item`;
+    formBtn.style.backgroundColor = '#333';
+    isEditMode = false;
 }
 
 // Initialize app, so we dont have all the event listeners in a global scope
