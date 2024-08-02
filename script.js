@@ -32,6 +32,11 @@ function onAddItemSubmit(e){
         itemToEdit.classList.remove('edit-mode');
         itemToEdit.remove();
         isEditMode = false;
+    } else {
+        if(checkIfItemExist(newItem)){
+            alert('That Item already exist');
+            return;
+        }
     }
     // // Create list item
     // const li = document.createElement('li');
@@ -48,7 +53,6 @@ function onAddItemSubmit(e){
 
     // Add item to local storage
     addItemToStorage(newItem);
-
 
     checkUI();
 
@@ -120,6 +124,17 @@ function onClickItem (e){
     } else {
         setItemToEdit(e.target); // when I click, its gonna capture the list item
     }
+}
+
+
+function checkIfItemExist(item){
+    const itemsFromStorage = getItemsFromStorage();
+    return itemsFromStorage.includes(item);
+    // if(itemsFromStorage.includes(item)){
+    //     return true;
+    // } else {
+    //     return false;
+    // }
 }
 
 function setItemToEdit(item){
