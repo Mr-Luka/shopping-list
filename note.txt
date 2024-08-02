@@ -8,3 +8,23 @@ Shopping List Project Specs:
 - Clic on an item to put into 'edit mode' and add to form
 - Update item
 - Deploy to Netlify
+
+
+
+Functions made:
+-  DisplayItems
+-  add Items when submitting the form
+-  Add items to the DOM 
+-  Create a button from scratch
+-  Create an Icon for the button or whatever
+-  Add items to the localStorage
+-  Get Items from the localStorage
+-  Remove items from the localStorage
+-  Check if the item exist
+-  Set the item to edit when I click item
+-  Remove an item
+-  Clearing all the items when clicking the button
+-  Filter the items from the UL - unordered list
+-  Function that will check if there are any items in the UI, if not
+   it will hide all the options, if not, it will show the buttons and list
+-  init - function that has all the Event Listeners inside
